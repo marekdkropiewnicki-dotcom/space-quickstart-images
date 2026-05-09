@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>space-quickstart-images · preview</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #ffffff;
+        --fg: #1f2328;
+        --muted: #59636e;
+        --border: #d1d9e0;
+        --card-bg: #f6f8fa;
+        --checker-a: #ffffff;
+        --checker-b: #f0f3f6;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0d1117;
+          --fg: #e6edf3;
+          --muted: #9198a1;
+          --border: #30363d;
+          --card-bg: #161b22;
+          --checker-a: #161b22;
+          --checker-b: #1f242c;
+        }
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        padding: 2rem 1.25rem 4rem;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica,
+          Arial, sans-serif;
+        background: var(--bg);
+        color: var(--fg);
+        line-height: 1.5;
+      }
+      .wrap { max-width: 1100px; margin: 0 auto; }
+      header { margin-bottom: 2rem; }
+      h1 { margin: 0 0 .25rem; font-size: 1.5rem; }
+      header p { margin: 0; color: var(--muted); }
+      header a { color: inherit; }
+      .grid {
+        display: grid;
+        gap: 1.25rem;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      }
+      .card {
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: var(--card-bg);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+      .card.wide { grid-column: 1 / -1; }
+      .frame {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        min-height: 180px;
+        background-image:
+          linear-gradient(45deg, var(--checker-b) 25%, transparent 25%),
+          linear-gradient(-45deg, var(--checker-b) 25%, transparent 25%),
+          linear-gradient(45deg, transparent 75%, var(--checker-b) 75%),
+          linear-gradient(-45deg, transparent 75%, var(--checker-b) 75%);
+        background-size: 16px 16px;
+        background-position: 0 0, 0 8px, 8px -8px, -8px 0;
+        background-color: var(--checker-a);
+      }
+      .frame img { max-width: 100%; height: auto; display: block; }
+      .meta {
+        padding: .75rem 1rem;
+        border-top: 1px solid var(--border);
+        font-size: .875rem;
+      }
+      .meta .name { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+      .meta .dim { color: var(--muted); }
+      .meta a { color: inherit; text-decoration: none; }
+      .meta a:hover { text-decoration: underline; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <h1>space-quickstart-images</h1>
+        <p>
+          Preview of SVG assets used by the Space quickstart experience.
+          Source on
+          <a href="https://github.com/marekdkropiewnicki-dotcom/space-quickstart-images">GitHub</a>.
+        </p>
+      </header>
+
+      <section class="grid" aria-label="Quickstart cards">
+        <figure class="card">
+          <div class="frame">
+            <img src="basics-card.svg" alt="Basics card" width="153" height="127" />
+          </div>
+          <figcaption class="meta">
+            <a class="name" href="basics-card.svg">basics-card.svg</a>
+            <span class="dim"> · 153×127</span>
+          </figcaption>
+        </figure>
+
+        <figure class="card">
+          <div class="frame">
+            <img src="git-sync-card.svg" alt="Git sync card" width="153" height="127" />
+          </div>
+          <figcaption class="meta">
+            <a class="name" href="git-sync-card.svg">git-sync-card.svg</a>
+            <span class="dim"> · 153×127</span>
+          </figcaption>
+        </figure>
+
+        <figure class="card">
+          <div class="frame">
+            <img src="public-docs-card.svg" alt="Public docs card" width="153" height="127" />
+          </div>
+          <figcaption class="meta">
+            <a class="name" href="public-docs-card.svg">public-docs-card.svg</a>
+            <span class="dim"> · 153×127</span>
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="grid" aria-label="Panel illustrations" style="margin-top:1.25rem">
+        <figure class="card wide">
+          <div class="frame">
+            <img src="import-panel.svg" alt="Import panel" width="1060" height="801" />
+          </div>
+          <figcaption class="meta">
+            <a class="name" href="import-panel.svg">import-panel.svg</a>
+            <span class="dim"> · 1060×801</span>
+          </figcaption>
+        </figure>
+
+        <figure class="card wide">
+          <div class="frame">
+            <img src="sync-repo.svg" alt="Sync repo" width="1060" height="801" />
+          </div>
+          <figcaption class="meta">
+            <a class="name" href="sync-repo.svg">sync-repo.svg</a>
+            <span class="dim"> · 1060×801</span>
+          </figcaption>
+        </figure>
+      </section>
+    </div>
+  </body>
+</html>
