@@ -1,0 +1,80 @@
+name: Optimize SVGs
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - '**.svg'
+      - 'svgo.config.js'
+      - '.github/workflows/optimize-svg.yml'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  optimize:
+    name: Run SVGO and open PR if changes
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install SVGO
+        run: npm install --no-save svgo@^3.3.2
+
+      - name: Record original sizes
+        run: |
+          echo '## SVG size report' > svg-report.md
+          echo '' >> svg-report.md
+          echo '| File | Before (bytes) | After (bytes) | Diff |' >> svg-report.md
+          echo '|------|----------------|---------------|------|' >> svg-report.md
+          for f in *.svg; do
+            size=$(wc -c < "$f")
+            echo "$f $size" >> .sizes-before.txt
+          done
+
+      - name: Run SVGO
+        run: npx svgo --config=svgo.config.js --folder . --recursive
+
+      - name: Build size diff
+        run: |
+          while read -r f size_before; do
+            size_after=$(wc -c < "$f")
+            diff=$((size_before - size_after))
+            echo "| $f | $size_before | $size_after | -$diff |" >> svg-report.md
+          done < .sizes-before.txt
+          rm -f .sizes-before.txt
+          cat svg-report.md >> $GITHUB_STEP_SUMMARY
+
+      - name: Detect changes
+        id: diff
+        run: |
+          if [ -n "$(git status --porcelain '*.svg')" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create Pull Request
+        if: steps.diff.outputs.changed == 'true' && github.event_name == 'workflow_dispatch'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "chore(assets): optimize SVG quickstart illustrations"
+          title: "chore(assets): optimize SVG quickstart illustrations"
+          body-path: svg-report.md
+          branch: chore/optimize-svgs
+          delete-branch: true
+          add-paths: |
+            *.svg
+
+      - name: Fail on dirty PR
+        if: steps.diff.outputs.changed == 'true' && github.event_name == 'pull_request'
+        run: |
+          echo 'SVGs are not optimized. Run npx svgo --config=svgo.config.js --folder . --recursive locally and commit the result.'
+          exit 1
