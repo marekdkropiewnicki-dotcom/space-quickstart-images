@@ -46,6 +46,7 @@
         gap: 1.25rem;
         grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       }
+      .grid + .grid { margin-top: 1.25rem; }
       .card {
         border: 1px solid var(--border);
         border-radius: 8px;
@@ -89,7 +90,7 @@
         <p>
           Preview of SVG assets used by the Space quickstart experience.
           Source on
-          <a href="https://github.com/marekdkropiewnicki-dotcom/space-quickstart-images">GitHub</a>.
+          <a href="https://github.com/marekdkropiewnicki-dotcom/space-quickstart-images" target="_blank" rel="noopener noreferrer">GitHub</a>.
         </p>
       </header>
 
@@ -125,10 +126,10 @@
         </figure>
       </section>
 
-      <section class="grid" aria-label="Panel illustrations" style="margin-top:1.25rem">
+      <section class="grid" aria-label="Panel illustrations">
         <figure class="card wide">
           <div class="frame">
-            <img src="import-panel.svg" alt="Import panel" width="1060" height="801" />
+            <img src="import-panel.svg" alt="Import panel" width="1060" height="801" loading="lazy" decoding="async" />
           </div>
           <figcaption class="meta">
             <a class="name" href="import-panel.svg">import-panel.svg</a>
@@ -138,7 +139,7 @@
 
         <figure class="card wide">
           <div class="frame">
-            <img src="sync-repo.svg" alt="Sync repo" width="1060" height="801" />
+            <img src="sync-repo.svg" alt="Sync repo" width="1060" height="801" loading="lazy" decoding="async" />
           </div>
           <figcaption class="meta">
             <a class="name" href="sync-repo.svg">sync-repo.svg</a>
